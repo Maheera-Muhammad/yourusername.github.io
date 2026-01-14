@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizen Complaint Portal - Government of Pakistan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ====== RESET & BASE STYLES ====== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* ====== NAVTCC STYLE HEADER ====== */
+        .govt-header {
+            background: linear-gradient(135deg, #004d26 0%, #006633 100%);
+            color: white;
+            padding: 8px 0 12px 0;
+            border-bottom: 5px solid #ffcc00;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 8px;
+        }
+        
+        .pak-flag {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .flag-icon {
+            color: white;
+            background: linear-gradient(to right, #01411C 33%, white 33%, white 66%, #01411C 66%);
+            width: 24px;
+            height: 16px;
+            position: relative;
+        }
+        
+        .flag-icon:after {
+            content: "★";
+            position: absolute;
+            color: white;
+            font-size: 8px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .header-date {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        
+        .header-main {
+            text-align: center;
+            padding: 5px 0;
+        }
+        
+        .ministry-line {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 3px;
+        }
+        
+        .portal-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 5px 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .portal-subtitle {
+            font-size: 15px;
+            font-style: italic;
+            color: #d4edda;
+            margin-top: 3px;
+        }
+        
+        /* ====== NAVIGATION MENU ====== */
+        .main-nav {
+            background-color: #004d26;
+            padding: 0;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            position: relative;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            display: block;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background-color: #006633;
+            color: #ffcc00;
+        }
+        
+        .nav-menu a i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+        
+        .login-btn {
+            background-color: #ffcc00;
+            color: #004d26 !important;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            border: none;
+            margin-left: 10px;
+        }
+        
+        .login-btn:hover {
+            background-color: #e6b800;
+        }
+        
+        /* ====== HERO SECTION ====== */
+        .hero-section {
+            background: linear-gradient(rgba(0, 77, 38, 0.9), rgba(0, 102, 51, 0.9)), 
+                        url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-description {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            opacity: 0.95;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background-color: #ffcc00;
+            color: #004d26;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #e6b800;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* ====== SERVICES SECTION ====== */
+        .services-section {
+            padding: 40px 0;
+            background-color: white;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .section-title {
+            color: #004d26;
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #ffcc00;
+            display: inline-block;
+            margin-left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .service-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            border-top: 4px solid #006633;
+            transition: all 0.3s;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 102, 51, 0.15);
+        }
+        
+        .service-icon {
+            font-size: 40px;
+            color: #006633;
+            margin-bottom: 15px;
+        }
+        
+        .service-title {
+            color: #004d26;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        /* ====== FOOTER ====== */
+        .main-footer {
+            background-color: #004d26;
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: #ffcc00;
+            font-size: 18px;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #d4edda;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #ffcc00;
+            padding-left: 5px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        /* ====== RESPONSIVE DESIGN ====== */
+        @media (max-width: 992px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-menu {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-menu a {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .portal-title {
+                font-size: 24px;
+            }
+            
+            .hero-title {
+                font-size: 28px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+        
+        /* ====== COMPLAINT FORM STYLES ====== */
+        .form-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin: 40px auto;
+            max-width: 900px;
+        }
+        
+        .form-title {
+            color: #004d26;
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #ffcc00;
+        }
+        
+        .form-step {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .form-step.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #004d26;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #006633;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 102, 51, 0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .btn-form {
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .btn-prev {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .btn-next, .btn-submit {
+            background-color: #006633;
+            color: white;
+        }
+        
+        .btn-prev:hover {
+            background-color: #5a6268;
+        }
+        
+        .btn-next:hover, .btn-submit:hover {
+            background-color: #004d26;
+        }
+        
+        /* Status tracking */
+        .status-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin: 30px auto;
+            max-width: 600px;
+        }
+        
+        .status-timeline {
+            margin-top: 30px;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .status-step {
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 20px;
+            border-left: 3px solid #ddd;
+            padding-left: 25px;
+        }
+        
+        .status-step.completed {
+            border-left-color: #28a745;
+        }
+        
+        .status-step.active {
+            border-left-color: #ffcc00;
+        }
+        
+        .status-step:before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #ddd;
+        }
+        
+        .status-step.completed:before {
+            background-color: #28a745;
+        }
+        
+        .status-step.active:before {
+            background-color: #ffcc00;
+            box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- ====== GOVERNMENT HEADER (NAVTCC Style) ====== -->
+    <header class="govt-header">
+        <div class="container">
+            <div class="header-top">
+                <div class="pak-flag">
+                    <div class="flag-icon"></div>
+                    Islamic Republic of Pakistan
+                </div>
+                <div class="header-date">
+                    <i class="far fa-calendar-alt"></i> <span id="currentDate"></span>
+                </div>
+            </div>
+            
+            <div class="header-main">
+                <div class="ministry-line">
+                    MINISTRY OF HUMAN RIGHTS
+                </div>
+                <h1 class="portal-title">CITIZEN COMPLAINT PORTAL</h1>
+                <div class="portal-subtitle">
+                    Your Voice Matters - Transparent Grievance Redressal System
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- ====== MAIN NAVIGATION ====== -->
+    <nav class="main-nav">
+        <div class="container nav-container">
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="complaint.html"><i class="fas fa-edit"></i> File Complaint</a></li>
+                <li><a href="status.html"><i class="fas fa-search"></i> Track Status</a></li>
+                <li><a href="#"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="#"><i class="fas fa-phone-alt"></i> Contact</a></li>
+                <li><a href="#" class="login-btn"><i class="fas fa-sign-in-alt"></i> Officer Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- ====== HERO SECTION ====== -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">File Your Complaint Online</h1>
+            <p class="hero-description">
+                A transparent and efficient platform for citizens to register complaints regarding government services, 
+                infrastructure issues, and public grievances. Your complaint will be directly forwarded to the concerned department.
+            </p>
+            <div class="hero-buttons">
+                <a href="complaint.html" class="btn-primary">
+                    <i class="fas fa-plus-circle"></i> File New Complaint
+                </a>
+                <a href="status.html" class="btn-secondary">
+                    <i class="fas fa-search"></i> Track Complaint Status
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ====== SERVICES SECTION ====== -->
+    <section class="services-section">
+        <div class="container">
+            <h2 class="section-title">Complaint Categories</h2>
+            <p class="section-subtitle">You can file complaints regarding the following services and issues</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-road"></i>
+                    </div>
+                    <h3 class="service-title">Roads & Infrastructure</h3>
+                    <p>Broken roads, street lights, bridges, drainage issues</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="service-title">Electricity Issues</h3>
+                    <p>Power outages, billing problems, dangerous wiring</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3 class="service-title">Water Supply</h3>
+                    <p>Water shortage, contaminated water, pipeline leaks</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <h3 class="service-title">Sanitation</h3>
+                    <p>Garbage collection, sewage problems, cleanliness</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3 class="service-title">Healthcare Services</h3>
+                    <p>Hospital facilities, medicine availability, doctor behavior</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="service-title">Education</h3>
+                    <p>School facilities, teacher issues, fee problems</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ====== FOOTER ====== -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Citizen Complaint Portal</h3>
+                    <p>A transparent platform for citizens to voice their concerns and get timely resolution from government departments.</p>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> Helpline: 0800-12345</p>
+                        <p><i class="fas fa-envelope"></i> Email: complaints@humanrights.gov.pk</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Address: Ministry of Human Rights, Islamabad</p>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="complaint.html">File Complaint</a></li>
+                        <li><a href="status.html">Track Status</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Government Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Prime Minister's Office</a></li>
+                        <li><a href="#">Cabinet Division</a></li>
+                        <li><a href="#">Pakistan Citizen's Portal</a></li>
+                        <li><a href="#">NAVTCC</a></li>
+                        <li><a href="#">Complaint Cell</a></li>
+                        <li><a href="#">Ministry Portal</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Ministry of Human Rights, Government of Pakistan. All rights reserved.</p>
+                <p>This is a demo project for educational purposes.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- ====== COMPLAINT FORM (Modal/Page) ====== -->
+    <!-- Note: For actual use, this would be in a separate file (complaint.html) -->
+    <div class="form-container" id="complaintForm" style="display: none;">
+        <h2 class="form-title">File a New Complaint</h2>
+        
+        <form id="complaintFormData">
+            <!-- Step 1: Personal Information -->
+            <div class="form-step active" id="step1">
+                <h3 style="color: #004d26; margin-bottom: 20px;">Step 1: Personal Information</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Full Name *</label>
+                        <input type="text" class="form-control" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">CNIC Number *</label>
+                        <input type="text" class="form-control" placeholder="XXXXX-XXXXXXX-X" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Profession *</label>
+                        <select class="form-control" required>
+                            <option value="">Select Profession</option>
+                            <option value="student">Student</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="doctor">Doctor</option>
+                            <option value="engineer">Engineer</option>
+                            <option value="business">Business Person</option>
+                            <option value="farmer">Farmer</option>
+                            <option value="housewife">Housewife</option>
+                            <option value="government">Government Employee</option>
+                            <option value="private">Private Employee</option>
+                            <option value="retired">Retired</option>
+                            <option value="labour">Labour/Skilled Worker</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">City/District *</label>
+                        <select class="form-control" required>
+                            <option value="">Select City</option>
+                            <option value="islamabad">Islamabad</option>
+                            <option value="lahore">Lahore</option>
+                            <option value="karachi">Karachi</option>
+                            <option value="peshawar">Peshawar</option>
+                            <option value="quetta">Quetta</option>
+                            <option value="multan">Multan</option>
+                            <option value="faisalabad">Faisalabad</option>
+                            <option value="rawalpindi">Rawalpindi</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Mobile Number *</label>
+                        <input type="tel" class="form-control" placeholder="03XX-XXXXXXX" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-control" placeholder="example@email.com">
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <div></div> <!-- Empty div for spacing -->
+                    <button type="button" class="btn-form btn-next" onclick="nextStep(1)">Next <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            
+            <!-- Step 2: Complaint Details -->
+            <div class="form-step" id="step2">
+                <h3 style="color: #004d26; margin-bottom: 20px;">Step 2: Complaint Details</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Complaint Type *</label>
+                    <select class="form-control" required>
+                        <option value="">Select Complaint Type</option>
+                        <option value="roads">Roads & Infrastructure</option>
+                        <option value="electricity">Electricity Issues</option>
+                        <option value="water">Water Supply</option>
+                        <option value="sanitation">Sanitation & Garbage</option>
+                        <option value="health">Healthcare Services</option>
+                        <option value="education">Education</option>
+                        <option value="corruption">Corruption</option>
+                        <option value="police">Police Issues</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Complaint Location *</label>
+                    <input type="text" class="form-control" placeholder="Street, Area, Landmark">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Detailed Description *</label>
+                    <textarea class="form-control" rows="5" placeholder="Please describe your complaint in detail..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Upload Evidence (Optional)</label>
+                    <input type="file" class="form-control" accept="image/*,.pdf">
+                    <small>You can upload photos or documents (Max 5MB)</small>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-form btn-prev" onclick="prevStep(2)"><i class="fas fa-arrow-left"></i> Previous</button>
+                    <button type="submit" class="btn-form btn-submit">Submit Complaint</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <!-- ====== STATUS TRACKING ====== -->
+    <div class="status-container" id="statusTrack" style="display: none;">
+        <h2 style="color: #004d26; text-align: center; margin-bottom: 30px;">Track Complaint Status</h2>
+        
+        <div class="form-group">
+            <label class="form-label">Enter Complaint ID</label>
+            <div style="display: flex; gap: 10px;">
+                <input type="text" class="form-control" placeholder="COMP-2023-XXXXX" id="complaintId">
+                <button class="btn-form btn-next" style="white-space: nowrap;">Track Status</button>
+            </div>
+        </div>
+        
+        <div id="statusResult" style="margin-top: 30px; display: none;">
+            <h3 style="color: #004d26;">Complaint Status: <span style="color: #ffcc00;">IN PROGRESS</span></h3>
+            <p><strong>Complaint ID:</strong> COMP-2023-12345</p>
+            <p><strong>Filed On:</strong> October 26, 2023</p>
+            <p><strong>Department:</strong> Water & Sanitation Agency</p>
+            <p><strong>Expected Resolution:</strong> November 5, 2023</p>
+            
+            <div class="status-timeline">
+                <div class="status-step completed">
+                    <h4>Complaint Filed</h4>
+                    <p>October 26, 2023 - 10:30 AM</p>
+                    <p>Your complaint has been registered successfully.</p>
+                </div>
+                
+                <div class="status-step completed">
+                    <h4>Under Review</h4>
+                    <p>October 27, 2023 - 02:15 PM</p>
+                    <p>Complaint is being reviewed by the concerned department.</p>
+                </div>
+                
+                <div class="status-step active">
+                    <h4>In Progress</h4>
+                    <p>October 29, 2023 - 11:00 AM</p>
+                    <p>Department has assigned staff to resolve the issue.</p>
+                </div>
+                
+                <div class="status-step">
+                    <h4>Resolved</h4>
+                    <p>Expected: November 5, 2023</p>
+                    <p>Your complaint will be marked as resolved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ====== JAVASCRIPT FUNCTIONALITY ======
+        
+        // Set current date
+        const now = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', options);
+        
+        // Form step navigation
+        function nextStep(currentStep) {
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.getElementById(`step${currentStep + 1}`).classList.add('active');
+        }
+        
+        function prevStep(currentStep) {
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.getElementById(`step${currentStep - 1}`).classList.add('active');
+        }
+        
+        // Form submission
+        document.getElementById('complaintFormData')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Complaint submitted successfully! You will receive a confirmation SMS with your Complaint ID.');
+            // In real implementation, this would send data to server
+        });
+        
+        // Show complaint form (for demo)
+        function showComplaintForm() {
+            document.getElementById('complaintForm').style.display = 'block';
+            window.scrollTo(0, document.getElementById('complaintForm').offsetTop);
+        }
+        
+        // Show status tracking (for demo)
+        function showStatusTrack() {
+            document.getElementById('statusTrack').style.display = 'block';
+            document.getElementById('statusResult').style.display = 'block';
+            window.scrollTo(0, document.getElementById('statusTrack').offsetTop);
+        }
+        
+        // For demo purposes - when clicking buttons
+        document.querySelectorAll('a[href="complaint.html"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                showComplaintForm();
+            });
+        });
+        
+        document.querySelectorAll('a[href="status.html"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                showStatusTrack();
+            });
+        });
+        
+        // Generate random complaint ID
+        function generateComplaintId() {
+            return 'COMP-' + new Date().getFullYear() + '-' + Math.floor(10000 + Math.random() * 90000);
+        }
+        
+        // Initialize with a complaint ID in the field
+        document.addEventListener('DOMContentLoaded', function() {
+            if(document.getElementById('complaintId')) {
+                document.getElementById('complaintId').value = generateComplaintId();
+            }
+        });
+    </script>
+</body>
+</html>              chnda ye bht acha ha but msla ye h yaha pakistan ka real flag ni ha or dsri bat cntact dashboard about or login ka page show ni horha or jo complain ka track status ha waha date or time sahi show ni horha
